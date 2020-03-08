@@ -1,0 +1,281 @@
+import java.util.*;
+
+class Main
+{
+
+  static ArrayList < Character > usrPos = new ArrayList < Character > ();
+  static ArrayList < Character > cpuPos = new ArrayList < Character > ();
+
+  public static void main (String[]args)
+  {
+    char[][] gameBoard = {
+      {'1', '|', '2', '|', '3'},
+      {'-', '+', '-', '+', '-'},
+      {'4', '|', '5', '|', '6'},
+      {'-', '+', '-', '+', '-'},
+      {'7', '|', '8', '|', '9'}
+    };
+
+    printBoard (gameBoard);
+
+    boolean turn = false;
+
+    while (endGame ())
+      {
+	turn = usrPlay (gameBoard, turn);
+	if (endGame ())
+	  {
+	    System.out.print ("\n");
+	    turn = cpuPlay (gameBoard, turn);
+	  }
+      }
+
+  }
+
+  public static boolean usrPlay (char[][]gameBoard, boolean turn)
+  {
+    System.out.print ("\nChoose Position Between 1 - 9 That Is Empty: ");
+    Scanner pos = new Scanner (System.in);
+    char usr = pos.next ().charAt (0);
+    usrPos.add (usr);
+    turn = takeInput (gameBoard, usr, turn);
+
+    return turn;
+  }
+
+  public static boolean cpuPlay (char[][]gameBoard, boolean turn)
+  {
+    Random rand = new Random ();
+    char cpu = (char) (rand.nextInt (9) + '1');
+    System.out.print ("CPU: " + cpu + "\n");
+    cpuPos.add (cpu);
+    turn = takeInput (gameBoard, cpu, turn);
+
+    return turn;
+  }
+
+  public static void printBoard (char[][]gameBoard)
+  {
+  for (char[]row:gameBoard)
+      {
+      for (char c:row)
+	  {
+	    System.out.print (c);
+	  }
+	System.out.println ();
+      }
+  }
+
+  public static boolean takeInput (char[][]gameBoard, char usr,
+				   boolean player)
+  {
+    char symbol = ' ';
+    if (player == false)
+      {
+	symbol = 'X';
+	player = true;
+      }
+    else
+      {
+	symbol = 'O';
+	player = false;
+      }
+    switch (usr)
+      {
+      case '1':
+	if (gameBoard[0][0] == usr)
+	  {
+	    gameBoard[0][0] = symbol;
+	  }
+	else if (player == false)
+	  {
+	    player = true;
+	    player = cpuPlay (gameBoard, player);
+	  }
+	else
+	  {
+	    player = false;
+	    player = usrPlay (gameBoard, player);
+	  }
+	break;
+      case '2':
+	if (gameBoard[0][2] == usr)
+	  {
+	    gameBoard[0][2] = symbol;
+	  }
+	else if (player == false)
+	  {
+	    player = true;
+	    player = cpuPlay (gameBoard, player);
+	  }
+	else
+	  {
+	    player = false;
+	    player = usrPlay (gameBoard, player);
+	  }
+	break;
+      case '3':
+	if (gameBoard[0][4] == usr)
+	  {
+	    gameBoard[0][4] = symbol;
+	  }
+	else if (player == false)
+	  {
+	    player = true;
+	    player = cpuPlay (gameBoard, player);
+	  }
+	else
+	  {
+	    player = false;
+	    player = usrPlay (gameBoard, player);
+	  }
+	break;
+      case '4':
+	if (gameBoard[2][0] == usr)
+	  {
+	    gameBoard[2][0] = symbol;
+	  }
+	else if (player == false)
+	  {
+	    player = true;
+	    player = cpuPlay (gameBoard, player);
+	  }
+	else
+	  {
+	    player = false;
+	    player = usrPlay (gameBoard, player);
+	  }
+	break;
+      case '5':
+	if (gameBoard[2][2] == usr)
+	  {
+	    gameBoard[2][2] = symbol;
+	  }
+	else if (player == false)
+	  {
+	    player = true;
+	    player = cpuPlay (gameBoard, player);
+	  }
+	else
+	  {
+	    player = false;
+	    player = usrPlay (gameBoard, player);
+	  }
+	break;
+      case '6':
+	if (gameBoard[2][4] == usr)
+	  {
+	    gameBoard[2][4] = symbol;
+	  }
+	else if (player == false)
+	  {
+	    player = true;
+	    player = cpuPlay (gameBoard, player);
+	  }
+	else
+	  {
+	    player = false;
+	    player = usrPlay (gameBoard, player);
+	  }
+	break;
+      case '7':
+	if (gameBoard[4][0] == usr)
+	  {
+	    gameBoard[4][0] = symbol;
+	  }
+	else if (player == false)
+	  {
+	    player = true;
+	    player = cpuPlay (gameBoard, player);
+	  }
+	else
+	  {
+	    player = false;
+	    player = usrPlay (gameBoard, player);
+	  }
+	break;
+      case '8':
+	if (gameBoard[4][2] == usr)
+	  {
+	    gameBoard[4][2] = symbol;
+	  }
+	else if (player == false)
+	  {
+	    player = true;
+	    player = cpuPlay (gameBoard, player);
+	  }
+	else
+	  {
+	    player = false;
+	    player = usrPlay (gameBoard, player);
+	  }
+	break;
+      case '9':
+	if (gameBoard[4][4] == usr)
+	  {
+	    gameBoard[4][4] = symbol;
+	  }
+	else if (player == false)
+	  {
+	    player = true;
+	    player = cpuPlay (gameBoard, player);
+	  }
+	else
+	  {
+	    player = false;
+	    player = usrPlay (gameBoard, player);
+	  }
+	break;
+      default:
+	player = false;
+	player = usrPlay (gameBoard, player);
+      }
+    printBoard (gameBoard);
+
+    return player;
+  }
+
+  public static boolean endGame (char[] pos, boolean player)
+  {
+    boolean check[] = {false, false, false};
+    
+    char[][] win = { {'1', '2', '3'};	//topRow
+    {
+    '4', '5', '6'};		//midRow
+    {
+    '7', '8', '9'};		//botRow
+    {
+    '1', '4', '7'};		//leftCol
+    {
+    '2', '5', '8'};		//midCol
+    {
+    '3', '6', '9'};		//rightCol
+    {
+    '1', '5', '9'};		//leftDiag
+    {
+    '3', '5', '7'};		//rightDiag
+    };
+
+    for (int i = 0; i < 8; i++){
+        for (int j = 0; j < 3; j++){
+            check[j] = Arrays. asList(pos).contains(win[i][j]);
+        }
+        if (check[0] && check[1] && check[2]){
+            if(player == false){
+                System.out.println ("\nCongratulations User, You Won!");
+				return false;
+            }
+			else if (player == true){
+				System.out.println ("\nSorry, CPU Won!");
+				return false;
+			}
+        }
+		else if (pos.size > 4){
+			System.out.println ("\nTIE!");
+			return false;
+		}
+		else{
+		    return true
+		}
+    }
+	  
